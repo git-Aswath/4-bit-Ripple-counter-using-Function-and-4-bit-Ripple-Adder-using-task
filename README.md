@@ -53,8 +53,39 @@ endmodule
 
 
 # Test Bench
-
+module ripple_carry_adder_tb;
+    reg [3:0] a_t, b_t;
+    reg Cin_t;
+    wire [3:0] sum_t;
+    wire Cout_t;
+    
+    ripple_carry_adder dut(.Cin(Cin_t),.A(a_t),.B(b_t),.Sum(sum_t),.Cout(Cout_t));
+    
+    initial 
+      begin 
+        a_t = 4'd2;
+        b_t = 4'd3;
+        Cin_t = 1'b0;
+        #100
+        a_t = 4'd4;
+        b_t = 4'd6;
+        #100
+        a_t = 4'd7;
+        b_t = 4'd8;
+        #100
+        a_t = 4'd9;
+        b_t = 4'd10;
+        Cin_t = 1'b1;
+        #100
+        a_t = 4'd11;
+        b_t = 4'd12;
+        #100
+        a_t = 4'd13;
+        b_t = 4'd14;                
+    end
+endmodule
 # Output Waveform
+<img width="1918" height="1198" alt="Screenshot 2025-10-07 151504" src="https://github.com/user-attachments/assets/fc6b24e5-33e9-4667-8548-d192c6edfedc" />
 
 # 4 bit Ripple counter using Function
 // 4-bit Ripple Counter using Function
@@ -76,10 +107,26 @@ module ripple_counter_func (
 endmodule
 
 # Test Bench
+module ripple_counter_func_tb;
+    reg clk_t, rst_t;
+    wire [3:0] q_t;
 
+    ripple_counter_func dut(.clk(clk_t),.rst(rst_t),.Q(q_t));
+
+    initial 
+        begin
+            clk_t = 0;
+            rst_t = 1;
+          #5 
+            rst_t = 0;
+    end
+     always
+          #10  clk_t = ~clk_t;
+endmodule
 
 # Output Waveform 
 
+<img width="1915" height="1198" alt="Screenshot 2025-10-07 152233" src="https://github.com/user-attachments/assets/2d957640-c51c-48ee-8c05-474168e22bf1" />
 
 # Conclusion
 In this experiment, a 4-bit-Ripple-counter-using-Function-and-4-bit-Ripple-Adder-using-task was successfully designed and simulated using Verilog HDL.
