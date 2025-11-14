@@ -53,8 +53,41 @@ endmodule
 
 
 # Test Bench
-
+```
+module ripple_carry_adder_tb;
+    reg [3:0] a_t, b_t;
+    reg Cin_t;
+    wire [3:0] sum_t;
+    wire Cout_t;
+    
+    ripple_carry_adder dut(.Cin(Cin_t),.A(a_t),.B(b_t),.Sum(sum_t),.Cout(Cout_t));
+    
+    initial 
+      begin 
+        a_t = 4'd2;
+        b_t = 4'd3;
+        Cin_t = 1'b0;
+        #100
+        a_t = 4'd4;
+        b_t = 4'd6;
+        #100
+        a_t = 4'd7;
+        b_t = 4'd8;
+        #100
+        a_t = 4'd9;
+        b_t = 4'd10;
+        Cin_t = 1'b1;
+        #100
+        a_t = 4'd11;
+        b_t = 4'd12;
+        #100
+        a_t = 4'd13;
+        b_t = 4'd14;                
+    end
+endmodule
+```
 # Output Waveform
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/4214eedf-a07c-42ea-b540-55b650c05165" />
 
 # 4 bit Ripple counter using Function
 // 4-bit Ripple Counter using Function
@@ -76,9 +109,27 @@ module ripple_counter_func (
 endmodule
 
 # Test Bench
+```
+module ripple_counter_func_tb;
+    reg clk_t, rst_t;
+    wire [3:0] q_t;
 
+    ripple_counter_func dut(.clk(clk_t),.rst(rst_t),.Q(q_t));
 
+    initial 
+        begin
+            clk_t = 0;
+            rst_t = 1;
+          #5 
+            rst_t = 0;
+    end
+     always
+          #10  clk_t = ~clk_t;
+endmodule
+```
 # Output Waveform 
+<img width="1919" height="1193" alt="Screenshot 2025-10-03 155852" src="https://github.com/user-attachments/assets/e2b7ed45-61bb-4049-93bb-983fd1a15ea4" />
+
 
 
 # Conclusion
